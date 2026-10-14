@@ -1,0 +1,12 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "Vizing.lineGraph_colorable",
+    "Vizing.lineGraph_chromaticNumber_le",
+    "Vizing.exists_equitable_edge_colouring"
+  ],
+  "definition_names": [],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

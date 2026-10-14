@@ -1,0 +1,121 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Vizing's theorem and equitable edge colourings"
+  description: >-
+    A Lean 4 / Mathlib formalization of Vizing's theorem: every finite simple graph G has a
+    proper edge colouring with Δ(G) + 1 colours, stated with Mathlib's line graph
+    (G.lineGraph is (Δ(G) + 1)-colourable, hence χ'(G) ≤ Δ(G) + 1), proved with fans and Kempe
+    chain exchanges. It also proves the equitable refinement: for every c ≥ Δ(G) + 1 there is a
+    proper edge colouring with colours Fin c in which any two colour classes (including unused
+    colours) differ in size by at most one, obtained by balancing a Vizing colouring with
+    alternating-component moves that strictly decrease a square energy.
+  authors:
+    - "Juan Pablo Traverso Gianini"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Juan Pablo Traverso Gianini"
+
+classification:
+  arxiv: ["math.CO"]
+  msc2020: ["05C15"]
+
+sources:
+  - title: "On an estimate of the chromatic class of a p-graph (Russian)"
+    authors:
+      - "Vadim G. Vizing"
+    type: "paper"
+    location: "Diskretnyi Analiz 3 (1964), 25–30"
+    relationship: "formalizes"
+    note: "The upper bound χ'(G) ≤ Δ(G) + 1 for simple graphs, by the standard fan / Kempe-chain argument."
+    license: "unknown"
+    author_endorsement: "n/a"
+  - title: "Paper IV (Erdős problem #81 for chordal graphs), Lean formalization freeze"
+    authors:
+      - "Juan Pablo Traverso Gianini"
+    type: "other"
+    location: "https://github.com/jtraverso/erdos-81-chordal-clique-partitions at ff2019f56a50cf300a6531c9f8d4a8fb1a541e3d, preprints/PAPER_IV/05_formalization"
+    relationship: "background"
+    note: "The edge-colouring modules were first developed there and then extracted and generalised for Lean Pool."
+    license: "Apache-2.0"
+    author_endorsement: "n/a"
+
+related_formalizations:
+  - id: "LeanPool/lean-pool, project Vizing (PR #578, merged 2026-10-03)"
+    relationship: "builds-on"
+    note: >-
+      The same author's contribution to Lean Pool; the modules under LeanPool/Vizing are copied
+      verbatim from LeanPool/lean-pool at commit 26ce45d3871e5560a8baffa4d49a8942b1d20a24
+      (without the generated aggregate `Imports.lean`). Challenge.lean and Solution.lean were
+      added for the Palomar submission. Other Lean formalizations of Vizing's theorem exist; this
+      is not claimed to be the first.
+
+status:
+  scope: >-
+    Proved for every finite simple graph with decidable adjacency: Vizing's upper bound in
+    colourability and chromatic-number form, and equitable proper edge colourings on every palette
+    Fin c with c ≥ Δ + 1. The lower bound χ' ≥ Δ and the classification into class 1 / class 2
+    are not part of this entry.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5"]
+      framework: "Claude Code (Anthropic)"
+      tool_setup: >-
+        AI-assisted development under the author's direction (the Lean proof provenance is
+        recorded as AI in Lean Pool): the fan / Kempe development, the equitable rebalancing,
+        the port to the Lean Pool pin and the Palomar packaging, checked with `lake build` and
+        `#print axioms` (Lean v4.35.0-rc3, Mathlib c55e6e786f49471c72fbddbec5415808896aec1e).
+      cost:
+        wall_time: "not tracked"
+        spend_usd: "subscription-based"
+        hardware: "local machine"
+      prompting_notes: "Natural-language instructions in Spanish, directed by the author."
+  spend_usd: "subscription-based"
+  notes: >-
+    The results and the route were chosen by the human author; the Lean proofs are AI-generated
+    and mechanically verified (no `sorry`, axioms limited to propext, Classical.choice and
+    Quot.sound, identical elaborated types for each Challenge/Solution pair).
+
+fidelity:
+  divergences: >-
+    Edge colourings are stated through Mathlib's line graph for Vizing's theorem; for the
+    equitable statement a colouring is a function `Sym2 V → Fin c`, proper meaning that two
+    distinct edges of G with the same colour share no vertex, and equitable meaning that the
+    colour classes (subsets of G.edgeFinset, unused colours giving empty classes) differ in size
+    by at most one. Vertex types are arbitrary finite types with decidable adjacency.
+
+review:
+  status: "agent-reviewed"
+  reviewers:
+    - "none"
+  notes: >-
+    Statements were audited against the classical results; no independent human mathematical
+    review has been performed. The results are classical and no mathematical novelty is claimed.
+
+alignment:
+  namespace: "Vizing"
+  statements:
+    - source: "Vizing (1964)"
+      lean: "Vizing.lineGraph_colorable"
+      module: "Challenge"
+      status: "proved"
+      note: "The line graph of G is (Δ(G) + 1)-colourable."
+    - source: "Vizing (1964), chromatic-index form"
+      lean: "Vizing.lineGraph_chromaticNumber_le"
+      module: "Challenge"
+      status: "proved"
+      note: "χ'(G) ≤ Δ(G) + 1."
+    - source: "Equitable edge colourings (classical balancing argument)"
+      lean: "Vizing.exists_equitable_edge_colouring"
+      module: "Challenge"
+      status: "proved"
+      note: "For c ≥ Δ(G) + 1 there is a proper edge colouring with colours Fin c whose classes differ in size by at most one."
+
+acknowledgements: >-
+  Mathlib and the Lean community; Lean Pool.

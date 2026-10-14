@@ -9,8 +9,8 @@ project:
     (G.lineGraph is (Δ(G) + 1)-colourable, hence χ'(G) ≤ Δ(G) + 1), proved with fans and Kempe
     chain exchanges. It also proves the equitable refinement: for every c ≥ Δ(G) + 1 there is a
     proper edge colouring with colours Fin c in which any two colour classes (including unused
-    colours) differ in size by at most one, obtained by balancing a Vizing colouring with
-    alternating-component moves that strictly decrease a square energy.
+    colours) differ in size by at most one (McDiarmid 1972), obtained by balancing a Vizing
+    colouring with alternating-component moves that strictly decrease a square energy.
   authors:
     - "Juan Pablo Traverso Gianini"
   license: "Apache-2.0"
@@ -29,6 +29,34 @@ sources:
     location: "Diskretnyi Analiz 3 (1964), 25–30"
     relationship: "formalizes"
     note: "The upper bound χ'(G) ≤ Δ(G) + 1 for simple graphs, by the standard fan / Kempe-chain argument."
+    license: "unknown"
+    author_endorsement: "n/a"
+  - title: "The Solution of a Timetabling Problem"
+    authors:
+      - "Colin McDiarmid"
+    id: "doi:10.1093/imamat/9.1.23"
+    type: "paper"
+    location: "IMA Journal of Applied Mathematics 9 (1972), 23–34"
+    relationship: "formalizes"
+    note: >-
+      Source of the equitable statement: if a graph has a proper edge colouring with k colours,
+      then for every k' ≥ k it has a proper edge colouring with k' colours whose colour classes
+      differ in size by at most one. The Lean theorem `Vizing.exists_equitable_edge_colouring`
+      is this statement for simple graphs with k = Δ(G) + 1 supplied by Vizing's theorem; the
+      Lean proof rebalances on the fixed palette Fin c by the alternating-path argument (two
+      classes differing by at least two span a union of alternating paths and cycles, one path
+      has more edges of the larger class, and swapping its colours strictly decreases the sum of
+      squares of the class sizes).
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Equitable colorations of graphs"
+    authors:
+      - "Dominique de Werra"
+    id: "doi:10.1051/m2an/197105r300031"
+    type: "paper"
+    location: "Revue française d'informatique et de recherche opérationnelle, Série rouge 5 (1971), no. R3, 3–8"
+    relationship: "background"
+    note: "Early work on equitable (balanced) colourings; background for the equitable statement."
     license: "unknown"
     author_endorsement: "n/a"
   - title: "Paper IV (Erdős problem #81 for chordal graphs), Lean formalization freeze"
@@ -93,10 +121,17 @@ fidelity:
 review:
   status: "agent-reviewed"
   reviewers:
-    - "none"
+    - "Claude Opus 5.5 (AI agent in Claude Code, acting for the author)"
   notes: >-
-    Statements were audited against the classical results; no independent human mathematical
-    review has been performed. The results are classical and no mathematical novelty is claimed.
+    Agent review by Claude Opus 5.5, distinct from the mechanical verification: the agent compared
+    each Challenge statement with the sources (Vizing 1964 for the upper bound; McDiarmid 1972 for
+    the equitable statement), checked that the Mathlib notions used (line graph, colourability,
+    chromatic number, edge finset, Sym2 membership) express them, checked that the copied library
+    modules are identical to the merged Lean Pool sources, and confirmed by `lake build`,
+    `#print axioms` and a comparison of the fully elaborated Challenge and Solution types that the
+    proofs use no `sorry` and only propext, Classical.choice and Quot.sound. The author directed
+    the work and approved the statements. No independent human mathematical review has been
+    performed. The results are classical and no mathematical novelty is claimed.
 
 alignment:
   namespace: "Vizing"
@@ -111,7 +146,7 @@ alignment:
       module: "Challenge"
       status: "proved"
       note: "χ'(G) ≤ Δ(G) + 1."
-    - source: "Equitable edge colourings (classical balancing argument)"
+    - source: "McDiarmid (1972), equitable edge colourings, with k = Δ + 1 from Vizing"
       lean: "Vizing.exists_equitable_edge_colouring"
       module: "Challenge"
       status: "proved"

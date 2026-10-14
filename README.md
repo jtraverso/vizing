@@ -6,9 +6,9 @@ This repository formalizes, for finite simple graphs `G` with maximum degree `Δ
 
 1. **Vizing's theorem (1964).** `G` has a proper edge colouring with `Δ(G) + 1` colours: its line
    graph is `(Δ(G) + 1)`-colourable, so `χ'(G) ≤ Δ(G) + 1`.
-2. **Equitable edge colourings.** For every `c ≥ Δ(G) + 1` there is a proper edge colouring with
-   colours `Fin c` in which any two colour classes differ in size by at most one (unused colours
-   count as empty classes).
+2. **Equitable edge colourings (McDiarmid 1972).** For every `c ≥ Δ(G) + 1` there is a proper edge
+   colouring with colours `Fin c` in which any two colour classes differ in size by at most one
+   (unused colours count as empty classes).
 
 The audited statements are in [`Challenge.lean`](Challenge.lean), which imports only Mathlib; the
 proofs are in [`Solution.lean`](Solution.lean). [`comparator.json`](comparator.json) lists the
@@ -41,10 +41,15 @@ this one is not claimed to be the first.
   `Classical.choice`, `Quot.sound`).
 * Only the upper bound `χ' ≤ Δ + 1` (the lower bound `χ' ≥ Δ` is immediate and not stated).
 
-## Source
+## Sources
 
 * V. G. Vizing, *On an estimate of the chromatic class of a p-graph* (Russian), Diskret. Analiz 3
   (1964) 25–30.
+* C. McDiarmid, *The solution of a timetabling problem*, IMA J. Appl. Math. 9 (1972) 23–34
+  (a proper edge colouring with `k` colours can be made equitable with any `k' ≥ k` colours; the
+  equitable theorem here is this statement with `k = Δ + 1` from Vizing).
+* D. de Werra, *Equitable colorations of graphs*, Rev. Française Informat. Recherche
+  Opérationnelle 5 (1971) R-3, 3–8 (background).
 
 ## Authorship and use of AI
 

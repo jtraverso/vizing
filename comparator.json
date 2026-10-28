@@ -4,9 +4,15 @@
   "theorem_names": [
     "Vizing.lineGraph_colorable",
     "Vizing.lineGraph_chromaticNumber_le",
-    "Vizing.exists_equitable_edge_colouring"
+    "Vizing.exists_equitable_edge_colouring",
+    "Vizing.maxDegree_le_lineGraph_chromaticNumber",
+    "Vizing.lineGraph_chromaticNumber_eq_or"
   ],
   "definition_names": [],
-  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
   "enable_nanoda": true
 }

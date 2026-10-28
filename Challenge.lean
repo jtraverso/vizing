@@ -52,4 +52,17 @@ theorem exists_equitable_edge_colouring {V : Type*} [Fintype V]
         (G.edgeFinset.filter fun e => colour e = b).card + 1 := by
   sorry
 
+/-- **Lower bound for the chromatic index.** `Δ(G) ≤ χ'(G)`: the edges at a vertex of maximum degree
+are pairwise adjacent. -/
+theorem maxDegree_le_lineGraph_chromaticNumber {V : Type*} [Fintype V] (G : SimpleGraph V)
+    [DecidableRel G.Adj] : (G.maxDegree : ℕ∞) ≤ G.lineGraph.chromaticNumber := by
+  sorry
+
+/-- **Class 1 / Class 2.** The chromatic index of a finite simple graph is `Δ(G)` or `Δ(G) + 1`. -/
+theorem lineGraph_chromaticNumber_eq_or {V : Type*} [Fintype V] (G : SimpleGraph V)
+    [DecidableRel G.Adj] :
+    G.lineGraph.chromaticNumber = (G.maxDegree : ℕ∞) ∨
+      G.lineGraph.chromaticNumber = (G.maxDegree : ℕ∞) + 1 := by
+  sorry
+
 end Vizing

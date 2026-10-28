@@ -9,6 +9,8 @@ This repository formalizes, for finite simple graphs `G` with maximum degree `Δ
 2. **Equitable edge colourings (McDiarmid 1972).** For every `c ≥ Δ(G) + 1` there is a proper edge
    colouring with colours `Fin c` in which any two colour classes differ in size by at most one
    (unused colours count as empty classes).
+3. **Lower bound and class 1 / class 2** (version 2). `Δ(G) ≤ χ'(G)`, hence `χ'(G) = Δ(G)` or
+   `χ'(G) = Δ(G) + 1`.
 
 The audited statements are in [`Challenge.lean`](Challenge.lean), which imports only Mathlib; the
 proofs are in [`Solution.lean`](Solution.lean). [`comparator.json`](comparator.json) lists the
@@ -39,7 +41,10 @@ this one is not claimed to be the first.
 
 * Finite vertex types with decidable adjacency; no `sorry`, no custom axioms (only `propext`,
   `Classical.choice`, `Quot.sound`).
-* Only the upper bound `χ' ≤ Δ + 1` (the lower bound `χ' ≥ Δ` is immediate and not stated).
+* The upper bound `χ' ≤ Δ + 1`, the lower bound `χ' ≥ Δ` and the dichotomy `χ' ∈ {Δ, Δ + 1}`
+  (`LeanPool/Vizing/LowerBound.lean`, adapted from the author's Erdős #81 Paper V formalization:
+  the edges at a vertex of maximum degree form a clique of the line graph). Which of the two
+  classes a graph belongs to is not addressed.
 
 ## Sources
 

@@ -6,6 +6,7 @@ Authors: Juan Pablo Traverso Gianini
 module
 
 public import LeanPool.Vizing.Corollaries
+public import LeanPool.Vizing.LowerBound
 
 /-!
 # Vizing's theorem and equitable edge colourings

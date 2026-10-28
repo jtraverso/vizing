@@ -10,7 +10,9 @@ project:
     chain exchanges. It also proves the equitable refinement: for every c ≥ Δ(G) + 1 there is a
     proper edge colouring with colours Fin c in which any two colour classes (including unused
     colours) differ in size by at most one (McDiarmid 1972), obtained by balancing a Vizing
-    colouring with alternating-component moves that strictly decrease a square energy.
+    colouring with alternating-component moves that strictly decrease a square energy. Version 2
+    adds the lower bound Δ(G) ≤ χ'(G) (the edges at a vertex of maximum degree form a clique of the
+    line graph) and hence the dichotomy χ'(G) ∈ {Δ(G), Δ(G) + 1} (class 1 / class 2).
   authors:
     - "Juan Pablo Traverso Gianini"
   license: "Apache-2.0"
@@ -83,8 +85,9 @@ status:
   scope: >-
     Proved for every finite simple graph with decidable adjacency: Vizing's upper bound in
     colourability and chromatic-number form, and equitable proper edge colourings on every palette
-    Fin c with c ≥ Δ + 1. The lower bound χ' ≥ Δ and the classification into class 1 / class 2
-    are not part of this entry.
+    Fin c with c ≥ Δ + 1; the lower bound χ' ≥ Δ and the dichotomy χ' ∈ {Δ, Δ + 1} (version 2),
+    including graphs on an empty vertex type. Deciding which of the two classes a graph belongs to
+    is not addressed.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: []
@@ -101,6 +104,19 @@ automation:
         `#print axioms` (Lean v4.35.0-rc3, Mathlib c55e6e786f49471c72fbddbec5415808896aec1e).
       cost:
         wall_time: "not tracked"
+        spend_usd: "subscription-based"
+        hardware: "local machine"
+      prompting_notes: "Natural-language instructions in Spanish, directed by the author."
+    - method: "agent"
+      models: ["Claude Opus 5.5"]
+      framework: "Claude Code (Anthropic)"
+      tool_setup: >-
+        Version 2: adapted the lower bound from the author's Erdős #81 Paper V formalization
+        (LeanPool/Vizing/LowerBound.lean, without its non-emptiness hypothesis) and added the
+        class 1 / class 2 dichotomy; checked with a local build, a pp.all comparison of the five
+        Challenge/Solution declarations and #print axioms.
+      cost:
+        wall_time: "under an hour"
         spend_usd: "subscription-based"
         hardware: "local machine"
       prompting_notes: "Natural-language instructions in Spanish, directed by the author."
@@ -151,6 +167,16 @@ alignment:
       module: "Challenge"
       status: "proved"
       note: "For c ≥ Δ(G) + 1 there is a proper edge colouring with colours Fin c whose classes differ in size by at most one."
+    - source: "Lower bound for the chromatic index (classical)"
+      lean: "Vizing.maxDegree_le_lineGraph_chromaticNumber"
+      module: "Challenge"
+      status: "proved"
+      note: "Δ(G) ≤ χ'(G)."
+    - source: "Vizing (1964), class 1 / class 2"
+      lean: "Vizing.lineGraph_chromaticNumber_eq_or"
+      module: "Challenge"
+      status: "proved"
+      note: "χ'(G) = Δ(G) or χ'(G) = Δ(G) + 1."
 
 acknowledgements: >-
   Mathlib and the Lean community; Lean Pool.

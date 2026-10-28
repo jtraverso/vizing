@@ -8,6 +8,7 @@ module
 public import Mathlib
 public import LeanPool.Vizing
 public import LeanPool.Vizing.Main
+public import LeanPool.Vizing.LowerBound
 
 /-!
 # Proofs of the statements in `Challenge.lean`
@@ -46,5 +47,18 @@ theorem exists_equitable_edge_colouring {V : Type*} [Fintype V]
   refine ⟨colour, fun e he f hf hef hcol v hve hvf => ?_, fun a b => heq a b⟩
   exact Finset.disjoint_left.1 (hp e he f hf hef hcol) (Sym2.mem_toFinset.2 hve)
     (Sym2.mem_toFinset.2 hvf)
+
+/-- **Lower bound for the chromatic index.** `Δ(G) ≤ χ'(G)`: the edges at a vertex of maximum degree
+are pairwise adjacent. -/
+theorem maxDegree_le_lineGraph_chromaticNumber {V : Type*} [Fintype V] (G : SimpleGraph V)
+    [DecidableRel G.Adj] : (G.maxDegree : ℕ∞) ≤ G.lineGraph.chromaticNumber :=
+  LeanPool.Vizing.maxDegree_le_lineGraph_chromaticNumber G
+
+/-- **Class 1 / Class 2.** The chromatic index of a finite simple graph is `Δ(G)` or `Δ(G) + 1`. -/
+theorem lineGraph_chromaticNumber_eq_or {V : Type*} [Fintype V] (G : SimpleGraph V)
+    [DecidableRel G.Adj] :
+    G.lineGraph.chromaticNumber = (G.maxDegree : ℕ∞) ∨
+      G.lineGraph.chromaticNumber = (G.maxDegree : ℕ∞) + 1 :=
+  LeanPool.Vizing.lineGraph_chromaticNumber_eq_or G
 
 end Vizing

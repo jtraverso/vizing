@@ -12,8 +12,13 @@ public import LeanPool.Vizing.Main
 
 The edges at a vertex of maximum degree are pairwise adjacent in the line graph, so they form a
 clique of size `Δ(G)` there and `Δ(G) ≤ χ'(G)`. Together with Vizing's theorem
-`χ'(G) ≤ Δ(G) + 1`, the chromatic index is `Δ(G)` or `Δ(G) + 1`. The lower bound is adapted from
-the author's Erdős #81 Paper V formalization.
+`χ'(G) ≤ Δ(G) + 1`, the chromatic index is `Δ(G)` or `Δ(G) + 1`.
+
+This module is not part of the Lean Pool contribution. The lower bound is adapted from
+`PaperV.maxDegree_le_edgeChromaticNumber` in `PaperV/ChromaticIndex.lean` of the author's Erdős #81
+Paper V formalization (`jtraverso/erdos-81-chordal-clique-partitions` at commit
+`3cbd90eed41af7e86ac6f1f4b8c796e20a5e661f`, `preprints/PAPER_V/05_formalization/lean`), without
+its `Nonempty V` hypothesis.
 -/
 
 @[expose] public section

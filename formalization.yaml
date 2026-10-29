@@ -75,11 +75,21 @@ related_formalizations:
   - id: "LeanPool/lean-pool, project Vizing (PR #578, merged 2026-10-03)"
     relationship: "builds-on"
     note: >-
-      The same author's contribution to Lean Pool; the modules under LeanPool/Vizing are copied
-      verbatim from LeanPool/lean-pool at commit 26ce45d3871e5560a8baffa4d49a8942b1d20a24
-      (without the generated aggregate `Imports.lean`). Challenge.lean and Solution.lean were
-      added for the Palomar submission. Other Lean formalizations of Vizing's theorem exist; this
+      The same author's contribution to Lean Pool. The modules LeanPool/Vizing/{Basic, ColourClasses, Corollaries, Endpoints, Equitable, EquitableDefinitions, Fan, Kempe, LineGraphColouring, Main and Step}.lean
+      are copied verbatim (identical git blob hashes) from LeanPool/lean-pool at commit
+      26ce45d3871e5560a8baffa4d49a8942b1d20a24; the generated aggregate Imports.lean is not
+      included. The root module LeanPool/Vizing.lean differs from Lean Pool's by one added import
+      (LeanPool.Vizing.LowerBound). LeanPool/Vizing/LowerBound.lean (version 2), Challenge.lean
+      and Solution.lean are not from Lean Pool; they were added for the Palomar submission. Other Lean formalizations of Vizing's theorem exist; this
       is not claimed to be the first.
+  - id: "jtraverso/erdos-81-chordal-clique-partitions at commit 3cbd90eed41af7e86ac6f1f4b8c796e20a5e661f, preprints/PAPER_V/05_formalization/lean (the author's Erdős #81 Paper V formalization)"
+    relationship: "builds-on"
+    note: >-
+      Source of the version 2 lower bound: LeanPool/Vizing/LowerBound.lean adapts the theorem
+      PaperV.maxDegree_le_edgeChromaticNumber of PaperV/ChromaticIndex.lean there (Δ(G) ≤ χ'(G)
+      via the clique of edges at a vertex of maximum degree), dropping its Nonempty V hypothesis
+      by treating the empty vertex type separately. The class 1 / class 2 dichotomy is new. No
+      other module of that formalization is used.
 
 status:
   scope: >-
@@ -112,7 +122,8 @@ automation:
       framework: "Claude Code (Anthropic)"
       tool_setup: >-
         Version 2: adapted the lower bound from the author's Erdős #81 Paper V formalization
-        (LeanPool/Vizing/LowerBound.lean, without its non-emptiness hypothesis) and added the
+        (jtraverso/erdos-81-chordal-clique-partitions at commit 3cbd90eed41af7e86ac6f1f4b8c796e20a5e661f, PaperV/ChromaticIndex.lean) into the new module LeanPool/Vizing/LowerBound.lean,
+        without its non-emptiness hypothesis, and added the
         class 1 / class 2 dichotomy; checked with a local build, a pp.all comparison of the five
         Challenge/Solution declarations and #print axioms.
       cost:
@@ -142,8 +153,11 @@ review:
     Agent review by Claude Opus 5.5, distinct from the mechanical verification: the agent compared
     each Challenge statement with the sources (Vizing 1964 for the upper bound; McDiarmid 1972 for
     the equitable statement), checked that the Mathlib notions used (line graph, colourability,
-    chromatic number, edge finset, Sym2 membership) express them, checked that the copied library
-    modules are identical to the merged Lean Pool sources, and confirmed by `lake build`,
+    chromatic number, edge finset, Sym2 membership) express them, checked by git blob hashes that
+    the eleven copied modules LeanPool/Vizing/{Basic, ColourClasses, Corollaries, Endpoints, Equitable, EquitableDefinitions, Fan, Kempe, LineGraphColouring, Main and Step}.lean are identical to the merged Lean Pool
+    sources at commit 26ce45d3871e5560a8baffa4d49a8942b1d20a24 (the root module LeanPool/Vizing.lean
+    differs by one added import, and LeanPool/Vizing/LowerBound.lean is new in version 2 and was
+    not compared with Lean Pool), and confirmed by `lake build`,
     `#print axioms` and a comparison of the fully elaborated Challenge and Solution types that the
     proofs use no `sorry` and only propext, Classical.choice and Quot.sound. The author directed
     the work and approved the statements. No independent human mathematical review has been

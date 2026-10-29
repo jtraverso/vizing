@@ -31,11 +31,25 @@ records provenance, sources and process.
   colours keeps the colouring proper and strictly decreases the sum of squares of the class sizes.
   Iterating gives an equitable colouring on the same palette.
 
-The modules under `LeanPool/Vizing/` are the author's contribution to
-[Lean Pool](https://github.com/LeanPool/lean-pool) (PR #578), copied verbatim from Lean Pool
-commit `26ce45d3871e5560a8baffa4d49a8942b1d20a24`; they were first developed in the Lean freeze of
-the author's Paper IV on Erdős problem #81. Other Lean formalizations of Vizing's theorem exist;
-this one is not claimed to be the first.
+Provenance of the library modules:
+
+* **Copied verbatim from Lean Pool.** `LeanPool/Vizing/{Basic, ColourClasses, Corollaries,
+  Endpoints, Equitable, EquitableDefinitions, Fan, Kempe, LineGraphColouring, Main, Step}.lean`
+  are the author's contribution to [Lean Pool](https://github.com/LeanPool/lean-pool) (PR #578),
+  byte-identical to Lean Pool commit `26ce45d3871e5560a8baffa4d49a8942b1d20a24` (same git blob
+  hashes); they were first developed in the Lean freeze of the author's Paper IV on Erdős problem
+  #81. Lean Pool's generated aggregate `LeanPool/Vizing/Imports.lean` is not included.
+* **Changed.** The root module `LeanPool/Vizing.lean` is Lean Pool's with one added line,
+  `public import LeanPool.Vizing.LowerBound`.
+* **Added in version 2, not in Lean Pool.** `LeanPool/Vizing/LowerBound.lean` (the lower bound
+  `Δ(G) ≤ χ'(G)` and the class 1 / class 2 dichotomy). The lower bound is adapted from
+  `PaperV.maxDegree_le_edgeChromaticNumber` in the author's Erdős #81 Paper V formalization,
+  [`preprints/PAPER_V/05_formalization/lean/PaperV/ChromaticIndex.lean`](https://github.com/jtraverso/erdos-81-chordal-clique-partitions/blob/3cbd90eed41af7e86ac6f1f4b8c796e20a5e661f/preprints/PAPER_V/05_formalization/lean/PaperV/ChromaticIndex.lean)
+  in `jtraverso/erdos-81-chordal-clique-partitions` at commit
+  `3cbd90eed41af7e86ac6f1f4b8c796e20a5e661f`; the version here drops its `Nonempty V` hypothesis.
+  The dichotomy is new.
+
+Other Lean formalizations of Vizing's theorem exist; this one is not claimed to be the first.
 
 ## Scope
 
